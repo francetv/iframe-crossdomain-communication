@@ -1,0 +1,42 @@
+<html>
+<head>
+    
+</head>
+<body style="background: #FFF;">
+    
+    <h2>iframe</h2>
+    
+    <div style="margin-bottom: 10px;">
+        <button onclick="FTVEN.iframeComIframe.sendCustomMessage('iframe2parent', 'bar');">Send a message to the parent (and watch the console)</button>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <button onclick="FTVEN.iframeComIframe.enterFullScreen();">Put the iframe in fullscreen mode from itself</button>
+    </div>
+    
+    <div id="heightChanger" style="background: #DDF">This div's height is changing randomly every second.</div>
+
+    
+    <script>
+        // Change randomly the height of the iframe, for the demo.
+        var div = document.getElementById('heightChanger');
+        setInterval(function() {
+            div.style.height = Math.round(Math.random() * 300) + 100;
+        }, 1000);
+    </script>
+
+
+    <!-- Insert the following two lines inside the iframe's HTML to activate autoresize -->
+    <script src="/ftv-iframecom-iframe.js"></script>
+    <script>FTVEN.iframeComIframe.autoresizeHeight();</script>
+    <!-- End of autoresize -->
+
+
+    <script>
+        // Listen for 'parent2iframe' messages and console.log the result
+        FTVEN.iframeComIframe.onCustomMessageReceived('parent2iframe', function(payload) {
+            console.log("Message recevied in the iframe from the parent: '%s'", payload);
+        });
+    </script>
+</body>
+</html>

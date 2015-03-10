@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>iframe-crossdomain-communication demo</title>
+</head>
+<body style="background: #FFC;">
+    
+    <h1>Parent window</h1>
+    
+    <div style="margin-bottom: 10px;">
+        <button onclick="FTVEN.iframeComParent.sendCustomMessage(document.querySelector('iframe'), 'parent2iframe', 'foo');">Send a message to the iframe (and watch the console)</button>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <button onclick="FTVEN.iframeComParent.setFullscreen(document.querySelector('iframe'));">Put the iframe in fullscreen mode from the parent</button>
+    </div>
+    
+    <iframe  border="1" width="500" height="300" scrolling="no"></iframe>
+    <script>
+        // Set the iframe to the same hostname but different port
+        document.querySelector('iframe').src = location.protocol + '//' + location.hostname + ':7002/demo/iframe.html';
+    </script>
+
+
+
+    <!-- Insert this script on the parent page to automatically activate iframe autoresize -->
+    <script src="/ftv-iframecom-parent.js"></script>
+
+
+
+    <script>
+        // Listen for 'iframe2parent' messages and console.log the result
+        FTVEN.iframeComParent.onCustomMessageReceived('iframe2parent', function(payload) {
+            console.log("Message recevied in the parent from the iframe: '%s'", payload);
+        });
+    </script>
+</body>
+</html>
