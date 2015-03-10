@@ -17,7 +17,19 @@ Add this script : `FTVEN.iframeComIframe.autoresizeHeight();`
 
 #### In the parent window
 
-Nothing to do. That's all you need to activate auto-resize.
+```css
+iframe.myIframe {
+   width: 300px;
+   height: 400px; /* it's important to set an height */
+   overflow: hidden; 
+}
+```
+
+```html
+<iframe class="myIframe" scrolling="no" src="..."></iframe>
+```
+
+That's all you need to activate auto-resize.
 
 #### Compatibility
 
